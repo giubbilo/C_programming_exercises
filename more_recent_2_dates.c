@@ -1,6 +1,7 @@
 /*
 DAVIDE GIANNUBILO - Esercizi Linguaggio C
 Scrivere un programma in C che, prese in input 2 date, determini qual è la piu' recente tra le due
+Given 2 dates in input, tell which one is the most recent
 */
 #include<stdio.h>
 int main()
