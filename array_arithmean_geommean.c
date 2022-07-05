@@ -1,6 +1,6 @@
 /*DAVIDE GIANNUBILO - Esercizi Linguaggio C
 Scrivere un programma che calcoli la media aritmetica e la media geometrica di N numeri presi in input
-Write a program in C that, given N numbers from input, calculates the mean and the geometric mean
+Write a program in C that, given N numbers from input, calculates the arithmetic mean and the geometric mean
 
 In this exercise, I used an array to keep track of which numbers the user has entered
 But you can avoid the use of it
