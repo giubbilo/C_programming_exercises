@@ -1,5 +1,11 @@
+/*DAVIDE GIANNUBILO - Esercizi Linguaggio C
+Dati 2 vettori in ingresso, unirli in un terzo vettore e stamparlo in ordine crescente
+Given 2 arrays in input, merge them into a third arrays, sort it in ascending order and print it
+*/
+
 #include<stdio.h>
 
+//Function prototypes
 void inseriscivettore(int, int []);
 void selectionsort(int, int[]);
 
@@ -12,11 +18,11 @@ int main()
     scanf("%d",&dim2);
     int dim3=dim1+dim2;
     int vettore1[dim1], vettore2[dim2], vettore3[dim3];
-
-    //int *vettore;
+    
     inseriscivettore(dim1, vettore1);
     inseriscivettore(dim2, vettore2);
-
+    
+    //Index i declared inside the main function, so we can use in the second for cycle
     for(i=0; i<dim1; i++)
     {
             vettore3[i]=vettore1[i];
