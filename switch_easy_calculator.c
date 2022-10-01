@@ -1,3 +1,8 @@
+/*DAVIDE GIANNUBILO - Esercizi Linguaggio C
+Scrivere un programma che simuli una calcolatrice con add, sub, molt, div ed eviti le divisioni per zero"
+Write a program that simulates a calculator with add, sub, molt, div and avoid divisions by zero"
+*/
+
 #include <stdio.h>
 
 int main()
