@@ -3,4 +3,4 @@ Hi all, this is my first repository on GitHub and I would like to help you under
 
 Feel free to use my code.
 
-(Something is written in italian but it is easy to translate it and it could be a good starting point to learn a new language)
+(Something is written in italian but it is easy to translate and it could be a good starting point to learn a new language)
