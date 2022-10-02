@@ -52,6 +52,10 @@ int main()
         do
         {
             scanf("%d %d", &c1, &c2);
+            if(c1 == 0 || c2 == 0)
+            {
+                printf("Hai inserito un numero negativo o uno zero. Reinserisci le coordinate: ");
+            }
         }while(c1<=0 || c2<=0 || c1>lato || c2>lato); //Some checks on the coordinates
         if(c1==r1 && c2==r2) //Check if you got the target
         {
@@ -64,11 +68,11 @@ int main()
         {
             tentativi--;
             matrice[c1][c2]=1;
-            printf("\nObiettivo mancato!\n");
+            printf("\n\tObiettivo mancato!\n");
             if(tentativi==0)
                 printf("\tHAI PERSO!\n");
             else
-                printf("Hai ancora %d tentativi", tentativi);
+                printf("\tHai ancora %d tentativi", tentativi);
         }
     }while(tentativi>0);
 
