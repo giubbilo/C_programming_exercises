@@ -4,88 +4,169 @@ Write a program in C that simulates "Battleships" game
 */
 
 #include<stdio.h>
-#include<stdlib.h>
+#include<time.h>
+#include<windows.h>
+
+const int LATO=10;
+
+void SetColor(unsigned short);
+void genera_cord();
+void stampa(char matrice[LATO][LATO]);
+
+//Declared globally in order to use them in the function "genera_cord"
+int r1, r2, r3, r4, r5, r6; 
 
 int main()
 {
-    time_t t;
-    int lato, r1, r2, tentativi=3, c1, c2; //You can choose how many tries yuo have
 
-    do
-    {   printf("Inserisci la dimensione della griglia: ");
-        scanf("%d", &lato);
-    }while(lato<=0); //To avoid negative and zero dimension
+    int c1, c2, opzione;
+    char matrice[LATO][LATO], scelta;
 
-    int matrice[lato][lato];
-
-    //Populate the matrix with zeroes
-    for(int i=1; i<=lato; i++)
+    printf("\n\t\t BENVENUTO NEL MENU \n\n");
+    printf("Premi 1 per giocare\n");
+    printf("Premi 2 per uscire\n");
+    printf("Tasto -> ");
+    scanf("%c", &scelta);
+    while(scelta == '1')
     {
-        for(int j=1; j<=lato; j++)
-        {
-            matrice[i][j]=0;
-            printf("|_%d_|", matrice[i][j]);
-        }
+        int tentativi = 3, numcarri=3;
+        system("cls");
         printf("\n");
-    }
+        for(int i=1; i<=LATO; i++)
+        {
+            for(int j=1; j<=LATO; j++)
+            {
+                matrice[i][j]='.';
+                SetColor(7);
+                printf("|.%c.", matrice[i][j]);
+            }
+            printf("|");
+            printf("\n");
+        }
 
-    //This is to create random position for our target
-    //In this case you just need to hit one position to win
-    srand((unsigned) time(&t));
-    r1 = (rand()%lato);
-    r2 = (rand()%lato);
-    printf("\n%d \t %d", r1, r2);
+        genera_cord();
 
-    /*Since the random function can give us a 0,
-    the target position is incremented by 1 in the case we get it because, in the game,
-    we do not have row/column 0*/
-    if(r1 == 0) r1++;
-    if(r2 == 0) r2++;
-
-    //The target is marked by a "-1" in the matrix
-    matrice[r1][r2]=-1;
-
-    do
-    {
-        printf("\n\nDove vuoi sparare? ");
-        printf("Inserisci le coordinate: ");
         do
         {
+            printf("\nDove vuoi sparare? ");
+            printf("Inserisci le coordinate: ");
             scanf("%d %d", &c1, &c2);
-            if(c1 == 0 || c2 == 0)
+            while(c1 <= 0 || c2 <= 0 || c1 > LATO || c2 > LATO)
             {
-                printf("Hai inserito un numero negativo o uno zero. Reinserisci le coordinate: ");
+                printf("Hai inserito un numero inferiore o uguale a zero. Reinserisci le coordinate -> ");
+                scanf("%d %d", &c1, &c2);
             }
-        }while(c1<=0 || c2<=0 || c1>lato || c2>lato); //Some checks on the coordinates
-        if(c1==r1 && c2==r2) //Check if you got the target
+            if(c1 == r1 && c2 == r2 || c1 == r3 && c2 == r4 || c1 == r5 && c2 == r6) //Se colpisci
+            {
+                numcarri--;
+                tentativi--;
+                matrice[c1][c2]='X';
+                printf("\n\tColpito e affondato!\n");
+                if(numcarri==0)
+                {
+                    printf("\tHAI VINTO!\n\n");
+                    tentativi=0;
+                    stampa(matrice);
+                }
+                else
+                {
+                     printf("\tHai ancora %d tentativi\n\n", tentativi);
+                     stampa(matrice);
+                }
+            } //If
+            else //Se non colpisci
+            {
+                tentativi--;
+                matrice[c1][c2]='O';
+                printf("\n\tObiettivo mancato!\n");
+                if(tentativi==0)
+                {
+                    system("cls");
+                    printf("\n\tHAI PERSO!\n\n");
+                    stampa(matrice);
+                }
+                else
+                {
+                    printf("\tHai ancora %d tentativi\n\n", tentativi);
+                    stampa(matrice);
+                }
+            } //Else
+        }while(tentativi>0);
+        printf("\nGli obiettivi erano in posizione %d - %d \t %d - %d \t %d - %d\n", r1, r2, r3, r4, r5, r6);
+        printf("\nVuoi fare un'altra partita?\n");
+        printf("Premi 1 per rigiocare o qualsiasi altro numero per uscire: ");
+        scanf(" %c", &scelta);
+        if(scelta != '1')
         {
-            matrice[c1][c2]=1;
-            printf("\n\tColpito e affondato!\n");
-            printf("\tHAI VINTO!\n");
-            tentativi=0;
+            return 0;
         }
-        else
-        {
-            tentativi--;
-            matrice[c1][c2]=1;
-            printf("\n\tObiettivo mancato!\n");
-            if(tentativi==0)
-                printf("\tHAI PERSO!\n");
-            else
-                printf("\tHai ancora %d tentativi", tentativi);
-        }
-    }while(tentativi>0);
+        system("cls");
+    }
+    return 0;
+}
 
-    //Print the final matrix with the target and the tries
-    printf("\nL'obiettivo era in posizione %d - %d\n\n", r1, r2);
-    for(int i=1; i<=lato; i++)
+void SetColor(unsigned short color)
+{
+    HANDLE hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hCon,color);
+}
+
+void stampa(char matrice[LATO][LATO])
+{
+    for(int i=1; i<=LATO; i++)
     {
-        for(int j=1; j<=lato; j++)
+        for(int j=1; j<=LATO; j++)
         {
-            printf("|_%d_|", matrice[i][j]);
+            if(matrice[i][j]=='O' || matrice[i][j]=='X')
+            {
+                SetColor(14);
+                printf("|.%c.", matrice[i][j]);
+                SetColor(7);
+            }
+            else
+                printf("|.%c.", matrice[i][j]);
         }
+        printf("|");
         printf("\n");
     }
+}
 
-    return 0;
+void genera_cord()
+{
+    int cord[6];
+    srand((unsigned) time(NULL));
+
+    for(int i=0; i<6; i++)
+    {
+        cord[i] = (rand()%LATO);
+        if(cord[i] == 0)
+        {
+            cord[i] = cord[i] + 1;
+        }
+    }
+
+    while(cord[0] == cord[2] && cord[1] == cord[3])
+    {
+        cord[2] = (rand()%LATO);
+        cord[3] = (rand()%LATO);
+    }
+    while(cord[0] == cord[4] && cord[1] == cord[5])
+    {
+        cord[4] = (rand()%LATO);
+        cord[5] = (rand()%LATO);
+    }
+    while(cord[2] == cord[4] && cord[3] == cord[5])
+    {
+        cord[4] = (rand()%LATO);
+        cord[5] = (rand()%LATO);
+    }
+    r1 = *(cord+0);
+    r2 = *(cord+1);
+    r3 = *(cord+2);
+    r4 = *(cord+3);
+    r5 = *(cord+4);
+    r6 = *(cord+5);
+    printf("\n%d \t %d", cord[0], cord[1]);
+    printf("\n%d \t %d", cord[1], cord[3]);
+    printf("\n%d \t %d\n", cord[4], cord[5]);
 }
