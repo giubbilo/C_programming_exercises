@@ -2,7 +2,7 @@
 Hi all, this is my first repository on GitHub and I would like to help you understand the C programming language with some "easy" exercises.
 
 My configuration:
-#-# Code::Blocks 20.03 + MinGW-W64 project compiler v.12.2.0 (https://www.mingw-w64.org/downloads/#mingw-builds)
+Code::Blocks 20.03 + MinGW-W64 project compiler v.12.2.0 (https://www.mingw-w64.org/downloads/#mingw-builds)
 
 Feel free to use my code.
 
