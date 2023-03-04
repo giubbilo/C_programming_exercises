@@ -1,6 +1,6 @@
 # C programming exercises
 
-Hi all, this is my first repository on GitHub and I would like to help you understand the C programming language with some "easy" exercises.
+Hi all, this is my first repository on GitHub and I would like to share some "easy" exercises written in C language.
 
 My configuration:
 Code::Blocks 20.03 + MinGW-W64 project compiler v.12.2.0 (https://www.mingw-w64.org/downloads/#mingw-builds)
